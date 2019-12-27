@@ -1,6 +1,8 @@
 import { CustomScalar, Scalar } from '@nestjs/graphql';
 import { Kind } from 'graphql';
 
+// lets GraphQL server send and receive Dates as numbers
+// see https://www.apollographql.com/docs/apollo-server/schema/scalars-enums/#date-as-a-scalar
 @Scalar('Date', type => Date)
 export class DateScalar implements CustomScalar<number, Date> {
   description = 'Date custom scalar type';
