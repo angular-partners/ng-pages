@@ -2,9 +2,10 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';
-import { normalizePort, onListening } from './main.utils';
+import { normalizePort, onListening, ensureEnvironment } from './main.utils';
 
 const httpPort = normalizePort(process.env.PORT || 3000);
+ensureEnvironment();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

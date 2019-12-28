@@ -26,3 +26,10 @@ export function onListening(this: any) {
   // tslint:disable-next-line: no-console
   console.log('*** Server is listening on ' + bind);
 }
+
+export function ensureEnvironment() {
+  if (!process.env.NODE_ENV) {
+    process.env.NODE_ENV = 'development';
+  }
+  console.log('*** Environment: ' + process.env.NODE_ENV);
+}
