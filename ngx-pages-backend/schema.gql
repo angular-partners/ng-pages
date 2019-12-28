@@ -6,23 +6,7 @@
 """Date custom scalar type"""
 scalar Date
 
-type Mutation {
-  addRecipe(newRecipeData: NewRecipeInput!): Recipe!
-  removeRecipe(id: String!): Boolean!
-}
-
-input NewRecipeInput {
-  title: String!
-  description: String
-  ingredients: [String!]!
-}
-
-type Query {
-  recipe(id: String!): Recipe!
-  recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
-}
-
-type Recipe {
+type Page {
   id: ID!
   title: String!
   description: String
@@ -30,6 +14,7 @@ type Recipe {
   ingredients: [String!]!
 }
 
-type Subscription {
-  recipeAdded: Recipe!
+type Query {
+  page(id: String!): Page!
+  pages(skip: Int = 0, take: Int = 25): [Page!]!
 }
