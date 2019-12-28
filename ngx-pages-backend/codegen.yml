@@ -1,0 +1,23 @@
+overwrite: true
+schema:
+  - "https://api.github.com/graphql":
+      headers:
+        Authorization: token ${GITHUB_TOKEN}
+documents: null
+generates:
+  src/generated/github-graphql.ts:
+    plugins:
+      ### Generate types for TypeScript - those are usually relevant for both client side and server side code
+      - "typescript"
+      ### Generate TypeScript signature for server-side resolvers
+      - "typescript-resolvers"
+      ### Generate TypeScript source files files that use graphql-tag
+      - "typescript-document-nodes"
+  ### Generates an introspection result
+  # src/generated/github-graphql.schema.json:
+  #  plugins:
+  #    - "introspection"
+  ### Generates an introspection result with only Unions and Interfaces
+  src/generated/github-fragment-matcher.ts:
+    plugins:
+      - "fragment-matcher"

@@ -32,3 +32,11 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+# GraphQL codegen
+
+To run GraphQL Code Generator.
+
+```bash
+$ GITHUB_TOKEN=XXX npm run graphql:codegen
+```

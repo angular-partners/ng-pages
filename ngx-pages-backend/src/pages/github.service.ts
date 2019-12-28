@@ -1,9 +1,15 @@
 import { Injectable } from '@nestjs/common';
 
-import ApolloClient, {InMemoryCache, HttpLink } from 'apollo-boost';
+import ApolloClient, {InMemoryCache, HttpLink, IntrospectionFragmentMatcher } from 'apollo-boost';
 import gql from 'graphql-tag';
 import fetch from 'cross-fetch';
 import { ConfigService } from '@nestjs/config';
+
+import introspectionQueryResultData from '../generated/github-fragment-matcher';
+
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData,
+});
 
 // playground: https://developer.github.com/v4/explorer/
 @Injectable()
@@ -38,6 +44,7 @@ export class GithubService {
           },
         });
       },
+      cache: new InMemoryCache({fragmentMatcher}),
     });
   }
 
