@@ -1,0 +1,25 @@
+query repoTree($owner: String, $name: String, $expression: String)  {
+  repository(owner: $owner, name: $name) {
+    tree: object(expression: $expression) {
+      ... on Tree {
+        entries {
+          name
+          object {
+            ... on Tree {
+              entries {
+                name
+                object {
+                  ... on Tree {
+                    entries {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

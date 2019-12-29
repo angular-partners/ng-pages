@@ -5,7 +5,11 @@ import gql from 'graphql-tag';
 import fetch from 'cross-fetch';
 import { ConfigService } from '@nestjs/config';
 
-import introspectionQueryResultData from '../generated/github-fragment-matcher';
+import introspectionQueryResultData from './generated/github-fragment-matcher';
+
+const repoTreeQuery = require('graphql-tag/loader!./schemas/repoTree.graphql');
+const repoContentQuery = require('graphql-tag/loader!./schemas/repoContent.graphql');
+
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
@@ -51,51 +55,27 @@ export class GithubService {
   async test(): Promise<any> {
 
     return this.createClient().query({
-      query: gql`
-        query  {
-          repository(owner: "angular-schule", name: "website-articles") {
-            tree: object(expression: "gh-pages:") {
-            ... on Tree {
-              entries {
-                name
-                object {
-                  ... on Tree {
-                    entries {
-                      name
-                      object {
-                        ... on Tree {
-                          entries {
-                            name
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }`,
+      query: repoTreeQuery,
+      variables: {
+        owner: this.repositoryOwner,
+        name: this.repositoryName,
+        expression: this.repositoryBranch + ':',
+      },
     })
-    .then(data => console.log(data.data))
+    .then(data => console.log(JSON.stringify(data.data, undefined, 2)))
     .catch(error => console.error(error));
   }
 
   getFileContent() {
     return this.createClient().query({
-      query: gql`
-        query {
-          repository(owner: "angular-schule", name: "website-articles") {
-            content:object(expression: "gh-pages:README.md") {
-              ... on Blob {
-                text
-              }
-            }
-          }
-        }`,
+      query: repoContentQuery,
+      variables: {
+        owner: this.repositoryOwner,
+        name: this.repositoryName,
+        expression: this.repositoryBranch + ':README.md',
+      },
     })
-    .then(data => console.log(data.data))
+    .then(data => console.log(JSON.stringify(data.data, undefined, 2))))
     .catch(error => console.error(error));
   }
 }

@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@graphql-codegen/fragment-matcher": "^1.9.1",
+    "@graphql-codegen/typescript-operations": "^1.9.1",
     "@nestjs/common": "^6.7.2",
     "@nestjs/config": "0.0.7",
     "@nestjs/core": "^6.7.2",
@@ -34,6 +35,7 @@
     "apollo-server-express": "^2.9.14",
     "cross-fetch": "^3.0.4",
     "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.6",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
@@ -42,6 +44,8 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.9.1",
+    "@graphql-codegen/introspection": "^1.9.1",
+    "@graphql-codegen/typescript": "^1.9.1",
     "@nestjs/cli": "^6.9.0",
     "@nestjs/schematics": "^6.7.0",
     "@nestjs/testing": "^6.7.1",
@@ -57,11 +61,7 @@
     "ts-node": "^8.4.1",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.0",
-    "typescript": "^3.6.3",
-    "@graphql-codegen/typescript": "^1.9.1",
-    "@graphql-codegen/typescript-resolvers": "^1.9.1",
-    "@graphql-codegen/typescript-document-nodes": "^1.9.1",
-    "@graphql-codegen/introspection": "^1.9.1"
+    "typescript": "^3.6.3"
   },
   "jest": {
     "moduleFileExtensions": [
